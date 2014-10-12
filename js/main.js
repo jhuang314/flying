@@ -39,12 +39,7 @@ function init() {
     
     controls = new THREE.OrbitControls(camera, element);
     controls.rotateUp(-Math.PI / 4);
-    controls.target.set(
-        // camera.position.x + 0.1,
-        // camera.position.y,
-        // camera.position.z
-	100,0,0
-    );
+    controls.target.set(100,0,0);
     controls.noZoom = true;
     controls.noPan = true;
     
@@ -138,7 +133,9 @@ function animate(t) {
     
     requestAnimationFrame(animate);
     camera.position.x+=1.1;
-    controls.target.x+=1.1;
+    if (controls.target){
+	controls.target.x+=1.1;
+    }
     //console.log(camera.position.x);
     update(clock.getDelta());
     render(clock.getDelta());
