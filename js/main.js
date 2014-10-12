@@ -85,7 +85,7 @@ function init() {
         map: texture
     });
     
-    var geometry = new THREE.PlaneGeometry(400, 100);
+    var geometry = new THREE.PlaneGeometry(200, 100);
     
     var mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = -Math.PI / 2;
@@ -93,10 +93,10 @@ function init() {
     
     
     
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 200; i++) {
     	scene.add(
     	    createSphere(
-    		randomIntFromInterval(100, 1000),
+    		randomIntFromInterval(300, 1000),
 		//  		randomIntFromInterval(10, 70),
 		randomIntFromInterval(-700, 700),
     		randomIntFromInterval(-900, 900)
@@ -133,9 +133,9 @@ function render(dt) {
 }
 
 function animate(t) {
-    camera.position.x+=1;
+    camera.position.x+=0.5;
     if (controls.target){
-	controls.target.x+=1;
+	controls.target.x+=0.5;
     }
     
     requestAnimationFrame(animate);
