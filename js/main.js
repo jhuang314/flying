@@ -23,6 +23,13 @@ function createSphere(x,y,z) {
 }
 
 function init() {
+
+    function cameraLookDir(camera) {
+        var vector = new THREE.Vector3(0, 10, -1);
+        vector.applyEuler(camera.rotation, camera.eulerOrder);
+        return vector;
+    }
+    
     renderer = new THREE.WebGLRenderer();
     element = renderer.domElement;
     container = document.getElementById('example');
@@ -33,15 +40,16 @@ function init() {
     scene = new THREE.Scene();
     
     camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
-    camera.position.set(0, 10, 0);
+    camera.position.set(0, 200, 0);
     scene.add(camera);
     
     controls = new THREE.OrbitControls(camera, element);
-    controls.rotateUp(Math.PI / 4);
+    controls.rotateUp(-Math.PI / 4);
     controls.target.set(
-        camera.position.x + 0.1,
-        camera.position.y,
-        camera.position.z
+        // camera.position.x + 0.1,
+        // camera.position.y,
+        // camera.position.z
+	100,0,0
     );
     controls.noZoom = true;
     controls.noPan = true;
@@ -81,21 +89,23 @@ function init() {
         map: texture
     });
     
-    var geometry = new THREE.PlaneGeometry(10000, 10000);
+    var geometry = new THREE.PlaneGeometry(10000, 1000);
     
     var mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = -Math.PI / 2;
     scene.add(mesh);
     
+    cameraLookDir(camera);    
+    
     
     
     for (var i = 0; i < 100; i++) {
-	scene.add(
-	    createSphere(
-		randomIntFromInterval(-1000, 0),
-		randomIntFromInterval(10, 70),
-		randomIntFromInterval(-900, 900)
-	    ));
+    	scene.add(
+    	    createSphere(
+    		randomIntFromInterval(0, 1000),
+    		randomIntFromInterval(10, 70),
+    		randomIntFromInterval(-900, 900)
+    	    ));
     }
     
     
@@ -115,6 +125,11 @@ function resize() {
 }
 
 function update(dt) {
+    
+    
+    
+    
+    
     resize();
     
     camera.updateProjectionMatrix();
@@ -127,8 +142,11 @@ function render(dt) {
 }
 
 function animate(t) {
+    
+    
     requestAnimationFrame(animate);
-    camera.position.x-=0.1;
+    camera.position.x+=1.1;
+    controls.target.x+=1.1;
     //console.log(camera.position.x);
     update(clock.getDelta());
     render(clock.getDelta());
