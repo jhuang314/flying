@@ -148,10 +148,10 @@ function render(dt) {
 }
 
 function animate(t) {
-    camera.position.x+=0.5;
+    camera.position.x+=1.0;
     moreBalls(camera.position.x + 1000);
     if (controls.target){
-	controls.target.x+=0.5;
+	controls.target.x+=1.0;
     }
     
     requestAnimationFrame(animate);
