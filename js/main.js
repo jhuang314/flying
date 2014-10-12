@@ -1,6 +1,7 @@
 var camera, scene, renderer;
 var effect, controls;
 var element, container;
+var balls = [];
 
 var clock = new THREE.Clock();
 
@@ -93,20 +94,34 @@ function init() {
     
     
     
-    for (var i = 0; i < 200; i++) {
-    	scene.add(
-    	    createSphere(
-    		randomIntFromInterval(300, 1000),
-		//  		randomIntFromInterval(10, 70),
-		randomIntFromInterval(-700, 700),
-    		randomIntFromInterval(-900, 900)
-    	    ));
+    for (var i = 0; i < 50; i++) {
+	var ball = 
+    		createSphere(
+		    i * 20,
+		    randomIntFromInterval(-700, 700),
+    		    randomIntFromInterval(-900, 900)
+    		);
+	balls.push(ball);
+	scene.add(ball);
     }
     
     
     
     window.addEventListener('resize', resize, false);
     setTimeout(resize, 1);
+}
+
+function moreBalls(xpos) {
+    if (Math.random() > 0.1)
+	return;
+    var ball = balls.shift;
+    scene.remove(ball);
+    var newBall = createSphere(
+	xpos,
+	randomIntFromInterval(-700, 700),
+    	randomIntFromInterval(-900, 900)
+    );	       
+    scene.add(newBall);
 }
 
 function resize() {
@@ -134,6 +149,7 @@ function render(dt) {
 
 function animate(t) {
     camera.position.x+=0.5;
+    moreBalls(camera.position.x + 1000);
     if (controls.target){
 	controls.target.x+=0.5;
     }
