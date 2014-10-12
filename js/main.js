@@ -99,7 +99,7 @@ function init() {
     
     
     
-    for (var i = 0; i < 300; i++) {
+    for (var i = 0; i < 50; i++) {
     	scene.add(
     	    createSphere(
     		randomIntFromInterval(100, 1000),
