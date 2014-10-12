@@ -24,12 +24,6 @@ function createSphere(x,y,z) {
 
 function init() {
     
-    function cameraLookDir(camera) {
-        var vector = new THREE.Vector3(0, 10, -1);
-        vector.applyEuler(camera.rotation, camera.eulerOrder);
-        return vector;
-    }
-    
     renderer = new THREE.WebGLRenderer();
     element = renderer.domElement;
     container = document.getElementById('example');
@@ -94,9 +88,6 @@ function init() {
     var mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = -Math.PI / 2;
     //    scene.add(mesh);
-    
-    cameraLookDir(camera);    
-    
     
     
     for (var i = 0; i < 50; i++) {
