@@ -49,6 +49,7 @@ function init() {
     controls.noPan = true;
     
     function setOrientationControls(e) {
+	console.log(e);
         if (!e.alpha) {
             return;
         }
@@ -66,6 +67,30 @@ function init() {
     
     var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
     scene.add(light);
+    
+    
+    var texture = THREE.ImageUtils.loadTexture(
+        'textures/patterns/checker.png'
+    );
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat = new THREE.Vector2(50, 50);
+    texture.anisotropy = renderer.getMaxAnisotropy();
+    
+    var material = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        specular: 0xffffff,
+        shininess: 20,
+        shading: THREE.FlatShading,
+        map: texture
+    });
+    
+    var geometry = new THREE.PlaneGeometry(400, 100);
+    
+    var mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = -Math.PI / 2;
+    scene.add(mesh);
+    
     
     
     for (var i = 0; i < 50; i++) {
@@ -112,7 +137,7 @@ function animate(t) {
     if (controls.target){
 	controls.target.x+=1;
     }
-
+    
     requestAnimationFrame(animate);
     
     update(clock.getDelta());
