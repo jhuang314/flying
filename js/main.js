@@ -23,7 +23,7 @@ function createSphere(x,y,z) {
 }
 
 function init() {
-
+    
     function cameraLookDir(camera) {
         var vector = new THREE.Vector3(0, 10, -1);
         vector.applyEuler(camera.rotation, camera.eulerOrder);
@@ -89,21 +89,22 @@ function init() {
         map: texture
     });
     
-    var geometry = new THREE.PlaneGeometry(10000, 1000);
+    var geometry = new THREE.PlaneGeometry(1000, 1000);
     
     var mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = -Math.PI / 2;
-    scene.add(mesh);
+    //    scene.add(mesh);
     
     cameraLookDir(camera);    
     
     
     
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 300; i++) {
     	scene.add(
     	    createSphere(
-    		randomIntFromInterval(0, 1000),
-    		randomIntFromInterval(10, 70),
+    		randomIntFromInterval(100, 1000),
+		//  		randomIntFromInterval(10, 70),
+		randomIntFromInterval(-700, 700),
     		randomIntFromInterval(-900, 900)
     	    ));
     }
